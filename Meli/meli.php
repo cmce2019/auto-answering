@@ -35,7 +35,7 @@ class Meli {
      */
     public static $CURL_OPTS = array(
         CURLOPT_USERAGENT => "MELI-PHP-SDK-2.0.0", 
-        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_CONNECTTIMEOUT => 10, 
         CURLOPT_RETURNTRANSFER => 1, 
         CURLOPT_TIMEOUT => 60
@@ -123,7 +123,7 @@ class Meli {
      * @return string|mixed
      */
     public function refreshAccessToken() {
-
+        
         if($this->refresh_token) {
              $body = array(
                 "grant_type" => "refresh_token", 
@@ -138,16 +138,17 @@ class Meli {
             );
         
             $request = $this->execute(self::$OAUTH_URL, $opts);
-
             if($request["httpCode"] == 200) {             
                 $this->access_token = $request["body"]->access_token;
 
-                if($request["body"]->refresh_token)
+                if($request["body"]->refresh_token){  
                     $this->refresh_token = $request["body"]->refresh_token;
+                }
 
                 return $request;
 
             } else {
+               
                 return $request;
             }   
         } else {

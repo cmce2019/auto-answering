@@ -5,7 +5,7 @@ require '../Meli/meli.php';
 require '../configApp.php';
 
 $meli = new Meli($appId, $secretKey);
-
+echo '<a href="' . $meli->getAuthUrl($redirectURI, Meli::$AUTH_URL[$siteId]) . '">Login using MercadoLibre oAuth 2.0</a>';
 if(isset($_GET['code']) || isset($_SESSION['access_token'])) {
 
 	// If code exist and session is empty
