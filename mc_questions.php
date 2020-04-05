@@ -19,7 +19,7 @@ class Mc_questions{
     public function testToken($test_access_token,$test_refresh_token){
         $this->meli = new Meli($this->appId, $this->secretKey,$test_access_token,$test_refresh_token);
         $params = array(
-            'app_id'=>'919119103695910',
+            'app_id'=>$this->appId,
             'access_token'=>$test_access_token
         );
         $test=$this->meli->get('/myfeeds',$params);
@@ -79,7 +79,7 @@ class Mc_questions{
             );
             $answer= array(
                 "question_id"=>$question['body']->id,
-                "text"=>"Si hay disponibles"
+                "text"=>"Si hay disponibles"    
             );
             $answer_data=$this->meli->post("/answers", $answer, $params);
             if ($answer_data['body']->status=="ANSWERED"){
@@ -102,4 +102,4 @@ else{
     header("HTTP/1.1 404"); 
 }
 
-?>
+?> 
