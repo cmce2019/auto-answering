@@ -96,9 +96,14 @@ class Mc_questions{
     }
 }
 if($_SERVER['REQUEST_METHOD']=='POST'){
-    $mc_questions=new Mc_questions($appId,$secretKey,$_POST['resource']);
+    if($_POST['topic']=='questions'){
+        $mc_questions=new Mc_questions($appId,$secretKey,$_POST['resource']);
+    }else{
+        echo json_encode('Solo preguntas');
+    }    
 }
 else{
+    echo json_encode('Solo post de preguntas');
     header("HTTP/1.1 404"); 
 }
 
