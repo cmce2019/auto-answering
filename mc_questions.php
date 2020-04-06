@@ -50,7 +50,6 @@ class Mc_questions{
     public function updateToken($test_access_token,$test_refresh_token){
         $this->meli = new Meli($this->appId, $this->secretKey,$test_access_token,$test_refresh_token);
         $auth=$this->meli->refreshAccessToken();
-        var_dump($auth);
         $this->access_token=$auth['body']->access_token;
         $this->refresh_token=$auth['body']->refresh_token;
         $data='{"access_token":"'.$this->access_token.'","refresh_token":"'.$this->refresh_token.'"}';
@@ -66,7 +65,7 @@ class Mc_questions{
             echo 'Error '.curl_error($ch);
         }else{
             $this->meli = new Meli($this->appId, $this->secretKey,$this->access_token,$this->refresh_token);
-            echo 'Ha insertado';
+            echo 'Se ha actualizado el token';
         }
         curl_close($ch);
     }
@@ -95,6 +94,8 @@ class Mc_questions{
         }   
     }
 }
+
+  
 if($_SERVER['REQUEST_METHOD']=='POST'){
     if($_POST['topic']=='questions'){
         $mc_questions=new Mc_questions($appId,$secretKey,$_POST['resource']);
