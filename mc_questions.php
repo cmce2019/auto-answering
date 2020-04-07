@@ -89,7 +89,7 @@ class Mc_questions{
                 echo json_encode("No se ha respondido la pregunta");
             }
         }else{
-            header("HTTP/1.1 400"); 
+            header("HTTP/1.1 200"); 
             echo json_encode("Ya ha sido respondida");
         }   
     }
