@@ -97,8 +97,10 @@ class Mc_questions{
 
   
 if($_SERVER['REQUEST_METHOD']=='POST'){
-    if($_POST['topic']=='questions'){
-        $mc_questions=new Mc_questions($appId,$secretKey,$_POST['resource']);
+  
+   $body = json_decode(file_get_contents("php://input"),true);
+   if($body['topic']=='questions'){
+        $mc_questions=new Mc_questions($appId,$secretKey,$body['resource']);
     }else{
         echo json_encode('Solo preguntas');
     }    
