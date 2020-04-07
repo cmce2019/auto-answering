@@ -1,11 +1,8 @@
 <?php
-class loco{
-    private $lovo;
-    public function __construct() {
-        $this->lovo='dwawda';
-        echo $this->lovo;
-    }
-
-}
-$alv= new loco();
+$des="carlosm.cordobae@gmail.com";
+$from="eruedagaleano@gmail.com";
+$asunto="mc info";
+$mensaje="asasdddddddddd";
+echo(mail($des,$asunto,$mensaje)." ".(strpos($asunto, "mca") !== false) );
+phpinfo();
 ?>
