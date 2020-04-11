@@ -70,7 +70,6 @@ class Mc_questions{
         curl_close($ch);
     }
     public function answerQuestion(){
-        $uri="/questions/6919148641";
         $question=$this->meli->get($this->resource);
         if ($question['body']->status!="ANSWERED"){
             $params = array(
