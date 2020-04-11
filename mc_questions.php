@@ -76,10 +76,11 @@ class Mc_questions{
             $params = array(
                 'access_token'=>$this->access_token
             );
-	    if(strpos($question['body']->text,"disponible") !== false){
+	    //if(strpos($question['body']->text,"disponible") !== false){
             $answer= array(
                 "question_id"=>$question['body']->id,
-                "text"=>"Si hay disponibles"    
+                "text"=>"Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo si tienes dudas del proceso 
+                o quieres obtener más información mira la ultima foto de esta publicación: https://articulo.mercadolibre.com.co/MCO-558264979-ideapad-s540-14-intel-_JM."    
             );
             $answer_data=$this->meli->post("/answers", $answer, $params);
             if ($answer_data['body']->status=="ANSWERED"){
@@ -88,13 +89,14 @@ class Mc_questions{
             }else{
                 header("HTTP/1.1 400");
                 echo json_encode("No se ha respondido la pregunta");
-            }}else{
+            }
+            /*}else{
 		$des="carlosm.cordobae@gmail.com";
 		$asunto="mc info";
 		$mensaje="hay una pregunta";
 		header("HTTP/1.1 200");
 		echo(mail($des,$asunto,$mensaje));		
-		}
+		}*/
         }else{
             header("HTTP/1.1 200"); 
             echo json_encode("Ya ha sido respondida");
