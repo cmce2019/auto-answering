@@ -78,8 +78,7 @@ class Mc_questions{
 	    //if(strpos($question['body']->text,"disponible") !== false){
             $answer= array(
                 "question_id"=>$question['body']->id,
-                "text"=>"Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo si tienes dudas del proceso 
-                o quieres obtener más información mira la ultima foto de esta publicación: https://articulo.mercadolibre.com.co/MCO-558264979-ideapad-s540-14-intel-_JM."    
+                "text"=>"Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo NO REALIZO VENTAS POR MERCADOLIBRE, dado que en caso de un reclamo no tengo forma de demostrar que entregué el producto. En este enlace puede realizar una compra de $1000 (https://articulo.mercadolibre.com.co/MCO-560290647-contacto-monedas-fifa-20-_JM) y obtendra mi cotacto si desea adquirir monedas, disponibilidad de más de 5 millones."    
             );
             $answer_data=$this->meli->post("/answers", $answer, $params);
             if ($answer_data['body']->status=="ANSWERED"){
