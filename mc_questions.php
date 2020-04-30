@@ -74,11 +74,12 @@ class Mc_questions{
         $default_answer="";
         $question=$this->meli->get($this->resource);
         if ($question['body']->status!="ANSWERED"){
-            $default_answer="Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo NO REALIZO VENTAS POR MERCADOLIBRE, dado que en caso de un reclamo no tengo forma de demostrar que entregué el producto. En este enlace puede realizar una compra de $1000 (https://articulo.mercadolibre.com.co/MCO-560290647-contacto-monedas-fifa-20-_JM) y obtendra mi cotacto si desea adquirir monedas, disponibilidad de más de 5 millones.";
+            
             $params = array(
                 'access_token'=>$this->access_token
             );
 	    if(strpos($question['body']->text,"disponible") !== false){
+            $default_answer="Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo NO REALIZO VENTAS POR MERCADOLIBRE, dado que en caso de un reclamo no tengo forma de demostrar que entregué el producto. En este enlace puede realizar una compra de $1000 (https://articulo.mercadolibre.com.co/MCO-560290647-contacto-monedas-fifa-20-_JM) y obtendra mi cotacto si desea adquirir monedas, disponibilidad de más de 5 millones.";
             $answer= array(
                 "question_id"=>$question['body']->id,
                 "text"=>$default_answer    
