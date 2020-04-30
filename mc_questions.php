@@ -70,16 +70,20 @@ class Mc_questions{
         curl_close($ch);
     }
     public function answerQuestion(){
+        
+        $default_answer="";
         $question=$this->meli->get($this->resource);
         if ($question['body']->status!="ANSWERED"){
+            $default_answer="Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo NO REALIZO VENTAS POR MERCADOLIBRE, dado que en caso de un reclamo no tengo forma de demostrar que entregué el producto. En este enlace puede realizar una compra de $1000 (https://articulo.mercadolibre.com.co/MCO-560290647-contacto-monedas-fifa-20-_JM) y obtendra mi cotacto si desea adquirir monedas, disponibilidad de más de 5 millones.";
             $params = array(
                 'access_token'=>$this->access_token
             );
-	    //if(strpos($question['body']->text,"disponible") !== false){
+	    if(strpos($question['body']->text,"disponible") !== false){
             $answer= array(
                 "question_id"=>$question['body']->id,
-                "text"=>"Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo NO REALIZO VENTAS POR MERCADOLIBRE, dado que en caso de un reclamo no tengo forma de demostrar que entregué el producto. En este enlace puede realizar una compra de $1000 (https://articulo.mercadolibre.com.co/MCO-560290647-contacto-monedas-fifa-20-_JM) y obtendra mi cotacto si desea adquirir monedas, disponibilidad de más de 5 millones."    
+                "text"=>$default_answer    
             );
+
             $answer_data=$this->meli->post("/answers", $answer, $params);
             if ($answer_data['body']->status=="ANSWERED"){
                 header("HTTP/1.1 200"); 
@@ -88,13 +92,27 @@ class Mc_questions{
                 header("HTTP/1.1 400");
                 echo json_encode("No se ha respondido la pregunta");
             }
-            /*}else{
-		$des="carlosm.cordobae@gmail.com";
-		$asunto="mc info";
-		$mensaje="hay una pregunta";
-		header("HTTP/1.1 200");
-		echo(mail($des,$asunto,$mensaje));		
-		}*/
+            }else{
+                $des="carlosm.cordobae@gmail.com";
+                $asunto="AQA sistema de respuesta automatico";
+                $mensaje="Hay una pregunta, revise la apliación";
+                header("HTTP/1.1 200");
+                echo(mail($des,$asunto,$mensaje));		
+        }
+            $data_response='{"id":"'.$this->resource.'", "answer":"'.$default_answer.'","body ":"'.$question['body']->text.'","item_id":"'.$question['body']->item_id.'"}';
+            $url="https://autoanswering-47a3a.firebaseio.com/questions.json";
+            $ch=curl_init();
+            curl_setopt($ch,CURLOPT_URL,$url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,$url);
+            curl_setopt($ch,CURLOPT_POST,1);
+            curl_setopt($ch,CURLOPT_POSTFIELDS, $data_response);
+            curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: text/plain'));
+            $response= curl_exec($ch);
+            if(curl_error($ch)){
+                echo 'Error '.curl_error($ch);
+            }else{
+                echo 'Ha insertado';
+            }
         }else{
             header("HTTP/1.1 200"); 
             echo json_encode("Ya ha sido respondida");
