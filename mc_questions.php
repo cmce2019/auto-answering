@@ -100,7 +100,7 @@ class Mc_questions{
                 header("HTTP/1.1 200");
                 echo(mail($des,$asunto,$mensaje));		
         }
-            $data_response='{"id":"'.$this->resource.'", "answer":"'.$default_answer.'","body ":"'.$question['body']->text.'","item_id":"'.$question['body']->item_id.'"}';
+            $data_response='{"id":"'.$this->resource.'", "answer":"'.$default_answer.'","body":"'.$question['body']->text.'","item_id":"'.$question['body']->item_id.'"}';
             $url="https://autoanswering-47a3a.firebaseio.com/questions.json";
             $ch=curl_init();
             curl_setopt($ch,CURLOPT_URL,$url);
