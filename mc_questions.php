@@ -79,16 +79,17 @@ class Mc_questions{
                 'access_token'=>$this->access_token
             );
 	    if(strpos($question['body']->text,"disponible") !== false){
+	    $ch=curl_init();
             curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_message.json");
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             $response= curl_exec($ch);
             $answer_array=json_decode($response);
-            $default_answer= $answer_array[rand(0,count($answer_array)-1)];
+            $default_answer= $answer_array[0];
             curl_close($ch);
             $answer= array(
                 "question_id"=>$question['body']->id,
-                "text"=>$default_answer    
+                "text"=>$answer_array[rand(0,count($answer_array)-1)]   
             );
 
             $answer_data=$this->meli->post("/answers", $answer, $params);
