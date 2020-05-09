@@ -79,7 +79,13 @@ class Mc_questions{
                 'access_token'=>$this->access_token
             );
 	    if(strpos($question['body']->text,"disponible") !== false){
-            $default_answer="Buen día gracias por preguntar, si hay monedas, las 100k de monedas valen 32.000, sin embargo NO REALIZO VENTAS POR MERCADOLIBRE, dado que en caso de un reclamo no tengo forma de demostrar que entregué el producto. En este enlace puede realizar una compra de $1000 (https://articulo.mercadolibre.com.co/MCO-560290647-contacto-monedas-fifa-20-_JM) y obtendra mi cotacto si desea adquirir monedas, disponibilidad de más de 5 millones.";
+            curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_message.json");
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response= curl_exec($ch);
+            $answer_array=json_decode($response);
+            $default_answer= $answer_array[rand(0,count($answer_array)-1)];
+            curl_close($ch);
             $answer= array(
                 "question_id"=>$question['body']->id,
                 "text"=>$default_answer    
@@ -114,6 +120,7 @@ class Mc_questions{
             }else{
                 echo 'Ha insertado';
             }
+            curl_close($ch);
         }else{
             header("HTTP/1.1 200"); 
             echo json_encode("Ya ha sido respondida");
