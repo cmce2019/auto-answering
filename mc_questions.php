@@ -78,8 +78,7 @@ class Mc_questions{
             $params = array(
                 'access_token'=>$this->access_token
             );
-	    if(strpos($question['body']->text,"disponible") !== false){
-	    $ch=curl_init();
+	        $ch=curl_init();
             curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_message.json");
             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -100,13 +99,18 @@ class Mc_questions{
                 header("HTTP/1.1 400");
                 echo json_encode("No se ha respondido la pregunta");
             }
-            }else{
-                $des="carlosm.cordobae@gmail.com";
-                $asunto="AQA sistema de respuesta automatico";
-                $mensaje="Hay una pregunta, revise la apliación";
-                header("HTTP/1.1 200");
-                echo(mail($des,$asunto,$mensaje));		
-        }
+            $array_string= preg_split("/[\s,]+/", $question['body']->text);
+            foreach ($array_string as &$value) {
+                preg_match('/^[0-9]{10}$/', $value, $m );
+                if(count($m)>0){
+                    $des="carlosm.cordobae@gmail.com";
+                    $asunto="AQA sistema de respuesta automatico";
+                    $mensaje="Hay una pregunta: \n"+$m[0]+"\nRevise la aplicación";
+                    header("HTTP/1.1 200");
+                    echo(mail($des,$asunto,$mensaje));
+                break;		
+                }
+            }
             $data_response='{"id":"'.$this->resource.'", "answer":"'.$default_answer.'","body":"'.$question['body']->text.'","item_id":"'.$question['body']->item_id.'"}';
             $url="https://autoanswering-47a3a.firebaseio.com/questions.json";
             $ch=curl_init();
