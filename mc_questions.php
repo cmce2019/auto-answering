@@ -105,7 +105,7 @@ class Mc_questions{
                 if(count($m)>0){
                     $des="carlosm.cordobae@gmail.com";
                     $asunto="AQA sistema de respuesta automatico";
-                    $mensaje="Hay una pregunta: \n"+$m[0]+"\nRevise la aplicación";
+                    $mensaje="Hay una pregunta: \n".$m[0]."\nRevise la aplicación";
                     header("HTTP/1.1 200");
                     echo(mail($des,$asunto,$mensaje));
                 break;		
