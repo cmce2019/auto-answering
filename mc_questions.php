@@ -73,6 +73,14 @@ class Mc_questions{
         
         $default_answer="";
         $question=$this->meli->get($this->resource);
+        if($question['body']->item_id!="MCO562428610"){
+            $des="carlosm.cordobae@gmail.com";
+            $asunto="AQA sistema de respuesta automatico";
+            $mensaje="Hay una pregunta en mercadolibre";
+            header("HTTP/1.1 200");
+            echo(mail($des,$asunto,$mensaje));
+            return;
+        }
         if ($question['body']->status!="ANSWERED"){
             
             $params = array(
