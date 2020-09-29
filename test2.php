@@ -15,6 +15,7 @@ if(curl_error($ch)){
 }else{
     echo 'Ha insertado';
     curl_close($ch);
+    
 }
 
 ?>
