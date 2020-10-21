@@ -139,6 +139,10 @@ class Mc_questions{
             echo json_encode("Ya ha sido respondida");
         }   
     }
+
+    public function autoBuyMessage(){
+        
+    }
 }
 
   
