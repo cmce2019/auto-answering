@@ -3,7 +3,7 @@
 
 $data='{"site_id":"MCO"}';
 
-$url="https://api.mercadolibre.com/users/test_user?access_token=APP_USR-919119103695910-102023-b111ced798129b417e25fbaf3fb500fc-390630451";
+$url="https://api.mercadolibre.com/users/test_user?access_token=APP_USR-919119103695910-102114-bf2710d1259d3dfe0ec5cb631c318695-390630451;
 
 $ch=curl_init();
 curl_setopt($ch,CURLOPT_URL,$url);
