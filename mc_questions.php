@@ -91,7 +91,6 @@ class Mc_questions{
 
         $this->buyer_id=$info['body']->buyer->id;
         $this->order_id=$info['body']->id;
-        echo $this->buyer_id . " ". $this->order_id;
         $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
@@ -99,21 +98,20 @@ class Mc_questions{
         $response= curl_exec($ch);
         $answer_array=json_decode($response);
         curl_close($ch);
-        echo $this->buyer_id . " ". $this->order_id. " ". $this->user_id." ".$answer_array[0]  ;
 
 
-/*         $answer= array(
-            "from"=>array("user_id"=>"390630451"),
-            "to"=>array("user_id"=>"658157693"),
-            "text"=>"gracias"
+         $answer= array(
+            "from"=>array("user_id"=>$this->user_id),
+            "to"=>array("user_id"=>$this->buyer_id),
+            "text"=>$answer_array[0]
         );
         
         
         
-        $answer_data=$meli->post("/messages/packs/4093129401/sellers/390630451", $answer, $params);
+        $answer_data=$this->meli->post("/messages/packs/".$this->order_id."/sellers/".$this->user_id, $answer, $params);
 
         header("HTTP/1.1 ".$answer_data['httpCode']);
-        echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra"; */
+        echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra"; 
 
     }
 
