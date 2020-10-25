@@ -53,7 +53,7 @@ class Mc_questions{
             if ($this->topic=='questions'){
                 $this->answerQuestion();
             }else{
-                $this->getOrderInfo();
+                $this->answerBuy();
             }
         }
         curl_close($ch);
@@ -81,7 +81,7 @@ class Mc_questions{
         curl_close($ch);
     }
 
-    public function getOrderInfo(){
+    public function answerBuy(){
         $params = array(
             'access_token'=>$this->access_token
         );
