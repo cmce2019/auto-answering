@@ -87,11 +87,11 @@ class Mc_questions{
         );
 
         //$info=$this->meli->get($this->resource,$params);
-        $info=$this->meli->get("/orders/4113257751",$params);
+        $info=$this->meli->get("/orders/4093129401",$params);
 
         $this->buyer_id=$info['body']->buyer->id;
         $this->order_id=$info['body']->id;
-        var_dump($info);
+        echo $this->buyer_id . " ". $this->order_id;
 /*         $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
