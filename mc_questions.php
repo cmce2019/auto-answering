@@ -107,7 +107,6 @@ class Mc_questions{
             "text"=>$answer_array[0]
         );
 
-        echo "/messages/packs/".$this->order_id."/sellers/".$this->user_id;
 
         $answer_data=$meli->post("/messages/packs/4113257751/sellers/390630451", $answer, $params);
         header("HTTP/1.1 ".$answer_data['httpCode']);
