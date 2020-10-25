@@ -102,7 +102,7 @@ class Mc_questions{
 
 
         $answer= array(
-            "from"=>array("user_id"=>"390630451"),
+            "from"=>array("user_id"=>$this->user_id),
             "to"=>array("user_id"=>"435914979"),
             "text"=>"gracias"
         );
