@@ -216,7 +216,7 @@ class Mc_questions{
 if($_SERVER['REQUEST_METHOD']=='POST'){
   
    $body = json_decode(file_get_contents("php://input"),true);
-   if(($body['topic']=='questions') || ($body['topic']=='messages')){
+   if(($body['topic']=='questions') || ($body['topic']=='orders')){
         $mc_questions=new Mc_questions($appId,$secretKey,$body['resource'],$body['topic'],$body['user_id']);
     }else{
         echo json_encode('Solo preguntas');
