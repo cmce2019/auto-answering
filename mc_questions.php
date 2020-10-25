@@ -104,11 +104,12 @@ class Mc_questions{
         $answer= array(
             "from"=>array("user_id"=>"390630451"),
             "to"=>array("user_id"=>"4113257751"),
-            "text"=>$answer_array[0]
+            "text"=>"gracias"
         );
 
 
         $answer_data=$meli->post("/messages/packs/4113257751/sellers/390630451", $answer, $params);
+
         header("HTTP/1.1 ".$answer_data['httpCode']);
         echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
 
