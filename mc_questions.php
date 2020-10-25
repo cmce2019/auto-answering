@@ -53,6 +53,7 @@ class Mc_questions{
             if ($this->topic=='questions'){
                 $this->answerQuestion();
             }else{
+                
                 $this->answerBuy();
             }
         }
@@ -91,27 +92,34 @@ class Mc_questions{
 
         $this->buyer_id=$info['body']->buyer->id;
         $this->order_id=$info['body']->id;
-        $ch=curl_init();
-        curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response= curl_exec($ch);
-        $answer_array=json_decode($response);
-        curl_close($ch);
+
+        $messages_info=$this->meli->get("/messages/packs/".$this->order_id."/sellers/".$this->user_id,$params);
+
+        if(count($messages_info['body']->messages)==0){
+            $ch=curl_init();
+            curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response= curl_exec($ch);
+            $answer_array=json_decode($response);
+            curl_close($ch);
 
 
-         $answer= array(
-            "from"=>array("user_id"=>$this->user_id),
-            "to"=>array("user_id"=>$this->buyer_id),
-            "text"=>$answer_array[0]
-        );
-        
-        
-        
-        $answer_data=$this->meli->post("/messages/packs/".$this->order_id."/sellers/".$this->user_id, $answer, $params);
+            $answer= array(
+                "from"=>array("user_id"=>$this->user_id),
+                "to"=>array("user_id"=>$this->buyer_id),
+                "text"=>$answer_array[0]
+            );
+            
+            
+            
+            $answer_data=$this->meli->post("/messages/packs/".$this->order_id."/sellers/".$this->user_id, $answer, $params);
 
-        header("HTTP/1.1 ".$answer_data['httpCode']);
-        echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra"; 
+            header("HTTP/1.1 ".$answer_data['httpCode']);
+            echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra"; 
+        }else{
+            echo "Ya se mando el mensaje de compra automatico"
+        }
 
     }
 
