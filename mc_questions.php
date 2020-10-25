@@ -118,7 +118,7 @@ class Mc_questions{
             header("HTTP/1.1 ".$answer_data['httpCode']);
             echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra"; 
         }else{
-            echo "Ya se mando el mensaje de compra automatico"
+            echo "Ya se mando el mensaje de compra automatico";
         }
 
     }
