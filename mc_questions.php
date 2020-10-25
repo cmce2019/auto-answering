@@ -20,7 +20,7 @@ class Mc_questions{
         $this->appId=$appId;
         $this->secretKey=$secretKey;
         $this->topic=$topic;
-        $this->user_id=$user_id;
+        $this->user_id="390630451";
         $this->getToken();
     }
     public function testToken($test_access_token,$test_refresh_token){
