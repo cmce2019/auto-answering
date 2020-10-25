@@ -19,12 +19,14 @@ curl_close($ch);
 
 
 $answer= array(
-    "from"=>array("user_id"=>"663060664"),
-    "to"=>array("user_id"=>"663058632"),
-    "text"=>$answer_array[0]
+    "from"=>array("user_id"=>"390630451"),
+    "to"=>array("user_id"=>"658157693"),
+    "text"=>"gracias"
 );
 
-$answer_data=$meli->post("/messages/packs/4117141360/sellers/663060664", $answer, $params);
+
+
+$answer_data=$meli->post("/messages/packs/4093129401/sellers/390630451", $answer, $params);
 
 header("HTTP/1.1 ".$answer_data['httpCode']);
 

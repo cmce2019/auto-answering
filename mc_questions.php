@@ -92,23 +92,23 @@ class Mc_questions{
         $this->buyer_id=$info['body']->buyer->id;
         $this->order_id=$info['body']->id;
 
-        $ch=curl_init();
+/*         $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $response= curl_exec($ch);
         $answer_array=json_decode($response);
-        curl_close($ch);
-
+        curl_close($ch); */
 
         $answer= array(
-            "from"=>array("user_id"=>$this->user_id),
-            "to"=>array("user_id"=>"435914979"),
+            "from"=>array("user_id"=>"390630451"),
+            "to"=>array("user_id"=>"658157693"),
             "text"=>"gracias"
         );
-
-
-        $answer_data=$meli->post("/messages/packs/4113257751/sellers/390630451", $answer, $params);
+        
+        
+        
+        $answer_data=$meli->post("/messages/packs/4093129401/sellers/390630451", $answer, $params);
 
         header("HTTP/1.1 ".$answer_data['httpCode']);
         echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
