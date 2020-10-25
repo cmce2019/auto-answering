@@ -51,8 +51,8 @@ class Mc_questions{
             if ($this->topic=='questions'){
                 $this->answerQuestion();
             }else{
-                $this->buyer_id="658157693";
-                $this->order_id="";
+                $this->buyer_id="663058632";
+                $this->order_id="4117093650";
                 $this->autoBuyMessage();
             }
         }
@@ -167,12 +167,12 @@ class Mc_questions{
 
 
         $answer= array(
-            "from"=>array("user_id"=>"390630451"),
+            "from"=>array("user_id"=>"663058632"),
             "to"=>array("user_id"=>$this->buyer_id),
             "text"=>$answer_array[0]
         );
 
-        $answer_data=$meli->post("/messages/packs/".$order_id."/sellers/390630451", $answer, $params);
+        $answer_data=$meli->post("/messages/packs/".$this->order_id."/sellers/663058632", $answer, $params);
         header("HTTP/1.1 ".$answer_data['httpCode']);
         echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
     }
