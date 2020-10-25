@@ -20,7 +20,7 @@ class Mc_questions{
         $this->appId=$appId;
         $this->secretKey=$secretKey;
         $this->topic=$topic;
-        $this->user_id="390630451";
+        $this->user_id=$user_id;
         $this->getToken();
     }
     public function testToken($test_access_token,$test_refresh_token){
@@ -92,13 +92,15 @@ class Mc_questions{
         $this->buyer_id=$info['body']->buyer->id;
         $this->order_id=$info['body']->id;
         echo $this->buyer_id . " ". $this->order_id;
-/*         $ch=curl_init();
+        $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         $response= curl_exec($ch);
         $answer_array=json_decode($response);
-        curl_close($ch); */
+        curl_close($ch);
+        echo $this->buyer_id . " ". $this->order_id. " ". $this->user_id." ".$answer_array[0]  ;
+
 
 /*         $answer= array(
             "from"=>array("user_id"=>"390630451"),
