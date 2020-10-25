@@ -107,9 +107,9 @@ class Mc_questions{
             "text"=>$answer_array[0]
         );
 
-        $answer_data=$meli->post("/messages/packs/".$this->order_id."/sellers/".$this->user_id, $answer, $params);
+       /*  $answer_data=$meli->post("/messages/packs/".$this->order_id."/sellers/".$this->user_id, $answer, $params);
         header("HTTP/1.1 ".$answer_data['httpCode']);
-        echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
+        echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra"; */
 
     }
 
