@@ -102,8 +102,8 @@ class Mc_questions{
 
 
         $answer= array(
-            "from"=>array("user_id"=>$this->user_id),
-            "to"=>array("user_id"=>$this->buyer_id),
+            "from"=>array("user_id"=>"390630451"),
+            "to"=>array("user_id"=>"4113257751"),
             "text"=>$answer_array[0]
         );
 
