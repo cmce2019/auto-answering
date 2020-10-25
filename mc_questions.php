@@ -13,12 +13,14 @@ class Mc_questions{
     private $topic;
     private $buyer_id;
     private $order_id;
+    private $user_id;
 
-    public function __construct($appId,$secretKey,$resource,$topic) {
+    public function __construct($appId,$secretKey,$resource,$topic,$user_id) {
         $this->resource=$resource;
         $this->appId=$appId;
         $this->secretKey=$secretKey;
         $this->topic=$topic;
+        $this->user_id=$user_id;
         $this->getToken();
     }
     public function testToken($test_access_token,$test_refresh_token){
@@ -51,9 +53,7 @@ class Mc_questions{
             if ($this->topic=='questions'){
                 $this->answerQuestion();
             }else{
-                $this->buyer_id="663058632";
-                $this->order_id="4117093650";
-                $this->autoBuyMessage();
+                $this->getOrderInfo();
             }
         }
         curl_close($ch);
@@ -80,6 +80,39 @@ class Mc_questions{
         }
         curl_close($ch);
     }
+
+    public function getOrderInfo(){
+        $params = array(
+            'access_token'=>$this->access_token
+        );
+
+        //$info=$this->meli->get($this->resource,$params);
+        $info=$this->meli->get("/orders/4113257751",$params);
+
+        $this->buyer_id=$info['body']->buyer->id;
+        $this->order_id=$info['body']->id;
+
+        $ch=curl_init();
+        curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response= curl_exec($ch);
+        $answer_array=json_decode($response);
+        curl_close($ch);
+
+
+        $answer= array(
+            "from"=>array("user_id"=>$this->user_id),
+            "to"=>array("user_id"=>$this->buyer_id),
+            "text"=>$answer_array[0]
+        );
+
+        $answer_data=$meli->post("/messages/packs/".$this->order_id."/sellers/".$this->user_id, $answer, $params);
+        header("HTTP/1.1 ".$answer_data['httpCode']);
+        echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
+
+    }
+
     public function answerQuestion(){
         
         $default_answer="";
@@ -151,11 +184,10 @@ class Mc_questions{
         }   
     }
 
-    public function autoBuyMessage(){
+    /* public function autoBuyMessage(){
         $params = array(
             'access_token'=>$this->access_token
         );
-
 
         $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,"https://autoanswering-47a3a.firebaseio.com/auto_buymessage.json");
@@ -167,15 +199,15 @@ class Mc_questions{
 
 
         $answer= array(
-            "from"=>array("user_id"=>"663058632"),
+            "from"=>array("user_id"=>"663060664"),
             "to"=>array("user_id"=>$this->buyer_id),
             "text"=>$answer_array[0]
         );
 
-        $answer_data=$meli->post("/messages/packs/".$this->order_id."/sellers/663058632", $answer, $params);
+        $answer_data=$meli->post("/messages/packs/".$this->order_id."/sellers/663060664", $answer, $params);
         header("HTTP/1.1 ".$answer_data['httpCode']);
         echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
-    }
+    } */
 }
 
   
@@ -183,7 +215,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
    $body = json_decode(file_get_contents("php://input"),true);
    if(($body['topic']=='questions') || ($body['topic']=='orders')){
-        $mc_questions=new Mc_questions($appId,$secretKey,$body['resource'],$body['topic']);
+        $mc_questions=new Mc_questions($appId,$secretKey,$body['resource'],$body['topic'],$body['user_id']);
     }else{
         echo json_encode('Solo preguntas');
     }    
