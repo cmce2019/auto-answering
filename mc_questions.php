@@ -27,9 +27,11 @@ class Mc_questions{
         $this->meli = new Meli($this->appId, $this->secretKey,$test_access_token,$test_refresh_token);
         $params = array(
             'app_id'=>$this->appId,
-            'access_token'=>$test_access_token
+            'access_token'=>$test_access_token,
+            'user_id'=>$this->user_id,
+            'api_version'=>'2'
         );
-        $test=$this->meli->get('/myfeeds',$params);
+        $test=$this->meli->get('/questions/search',$params);
         if($test['httpCode']==400){
             $this->updateToken($test_access_token,$test_refresh_token);
             return false;

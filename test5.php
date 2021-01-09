@@ -2,11 +2,12 @@
 require 'Meli/meli.php';
 require 'configApp.php';
 
-$meli = new Meli($appId, $secretKey,"APP_USR-8165220320761420-102423-0dd1be0eca84f77e1e341a4f6a3d81bf-390630451","TG-5f94b91200d11d00069d9d96-390630451");
+$meli = new Meli($appId, $secretKey,"APP_USR-8165220320761420-010703-0152ebd7cb9319752fbae2e2ffc91ca0-661466651","TG-5ff67e867e9138000636a3d7-661466651");
 
 
 $params = array(
-    'access_token'=>"APP_USR-8165220320761420-102423-0dd1be0eca84f77e1e341a4f6a3d81bf-390630451"
+    'app_id'=>"",
+    'access_token'=>"APP_USR-8165220320761420-010703-0152ebd7cb9319752fbae2e2ffc91ca0-661466651"
 );
 
 $ch=curl_init();
@@ -29,6 +30,8 @@ $answer= array(
 $answer_data=$meli->post("/messages/packs/4093129401/sellers/390630451", $answer, $params);
 
 header("HTTP/1.1 ".$answer_data['httpCode']);
+$test=meli->get('/myfeeds',$params);
+var_dump($answer_data);
 
 echo $answer_data['httpCode']==201 ?  "Se ha respondido la compra" : "No se ha respondido la compra";
 
