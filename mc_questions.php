@@ -129,7 +129,7 @@ class Mc_questions{
         
         $default_answer="";
         $question=$this->meli->get($this->resource);
-        if($question['body']->item_id!="MCO585423043" && $question['body']->status!="ANSWERED"){
+        if($question['body']->item_id!="MCO594942092" && $question['body']->status!="ANSWERED"){
             $des="carlosm.cordobae@gmail.com";
             $asunto="AQA sistema de respuesta automatico";
             $mensaje="Hay una pregunta en mercadolibre";
