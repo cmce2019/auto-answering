@@ -260,8 +260,8 @@ class Meli {
      */
     public function execute($path, $opts = array(), $params = array(), $assoc = false) {
         $uri = $this->make_path($path, $params);
-
         $ch = curl_init($uri);
+        curl_setopt($ch,CURLOPT_HTTPHEADER, array('Authorization: Bearer '.$this->access_token));
         curl_setopt_array($ch, self::$CURL_OPTS);
 
         if(!empty($opts))
