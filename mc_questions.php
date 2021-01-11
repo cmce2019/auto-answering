@@ -32,7 +32,7 @@ class Mc_questions{
             'api_version'=>'2'
         );
         $test=$this->meli->get('/questions/search',$params);
-        if($test['httpCode']==400){
+        if($test['httpCode']==401){
             $this->updateToken($test_access_token,$test_refresh_token);
             return false;
         }
