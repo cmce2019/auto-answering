@@ -66,6 +66,7 @@ class Mc_questions{
         $auth=$this->meli->refreshAccessToken();
 /*      $this->access_token=$auth['body']->access_token;
         $this->refresh_token=$auth['body']->refresh_token; */
+        error_log(json_encode($auth));
         $this->access_token=$test_access_token." ".$test_refresh_token;
         $this->refresh_token=2;
         $data='{"access_token":"'.$this->access_token.'","refresh_token":"'.$this->refresh_token.'"}';
