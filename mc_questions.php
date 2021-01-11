@@ -62,15 +62,13 @@ class Mc_questions{
         curl_close($ch);
     }
     public function updateToken($test_access_token,$test_refresh_token){
-        $test_access_token="APP_USR-8165220320761420-011119-a2c55a8ac59d288e01a6f76814a5ef01-390630451";
-        $test_refresh_token="TG-5ffca397be96150006913e47-390630451";
         $this->meli = new Meli($this->appId, $this->secretKey,$test_access_token,$test_refresh_token);
         $auth=$this->meli->refreshAccessToken();
 /*      $this->access_token=$auth['body']->access_token;
         $this->refresh_token=$auth['body']->refresh_token; */
-        error_log("hola");
+/*         error_log("hola");
         error_log($this->appId." ".$this->secretKey." ".$test_access_token." ".$test_refresh_token);
-        error_log(json_encode($auth));
+        error_log(json_encode($auth)); */
         $this->access_token=$auth['body']->access_token;
         $this->refresh_token=$auth['body']->refresh_token;
         $data='{"access_token":"'.$this->access_token.'","refresh_token":"'.$this->refresh_token.'"}';
