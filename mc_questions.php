@@ -64,8 +64,9 @@ class Mc_questions{
     public function updateToken($test_access_token,$test_refresh_token){
         $this->meli = new Meli($this->appId, $this->secretKey,$test_access_token,$test_refresh_token);
         $auth=$this->meli->refreshAccessToken();
-        $this->access_token=$auth['body']->access_token;
-        $this->refresh_token=$auth['body']->refresh_token;
+/*         $this->access_token=$auth['body']->access_token;
+        $this->refresh_token=$auth['body']->refresh_token; */
+        
         $data='{"access_token":"'.$this->access_token.'","refresh_token":"'.$this->refresh_token.'"}';
         $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,$this->url);
