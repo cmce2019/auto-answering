@@ -25,7 +25,7 @@ $a=$meli->refreshAccessToken();
 
 
 $data='{"access_token":"'.$a['body']->access_token.'","refresh_token":"'.$a['body']->refresh_token.'"}';
-echo $data;
+echo json_encode($a);
 
 
 //var_dump($a);

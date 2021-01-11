@@ -66,8 +66,8 @@ class Mc_questions{
         $auth=$this->meli->refreshAccessToken();
 /*      $this->access_token=$auth['body']->access_token;
         $this->refresh_token=$auth['body']->refresh_token; */
-        $this->access_token=json_decode($auth);
-        $this->refresh_token=2;
+        $this->access_token=json_encode($auth);
+        $this->refresh_token="TG-5ffca397be96150006913e47-390630451";
         $data='{"access_token":"'.$this->access_token.'","refresh_token":"'.$this->refresh_token.'"}';
         $ch=curl_init();
         curl_setopt($ch,CURLOPT_URL,$this->url);
