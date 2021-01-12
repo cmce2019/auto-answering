@@ -208,6 +208,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   
    $body = json_decode(file_get_contents("php://input"),true);
    if(($body['topic']=='questions') || ($body['topic']=='orders')){
+        error_log(json_encode($body));
         $mc_questions=new Mc_questions($appId,$secretKey,$body['resource'],$body['topic'],$body['user_id']);
     }else{
         echo json_encode('Solo preguntas');
